@@ -3,14 +3,8 @@
 /* Enable a `.dark` class variant for manual theme switching */
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* ============================================================
- * Remotown Design System (from Google Stitch export)
- *   - Brand: Precision, Reliability, Human-Centricity
- *   - Style: Corporate Modern
- *   - Type:  Inter only
- * ============================================================ */
+
 @theme {
-  /* ---------- Color tokens (Material 3 inspired) ---------- */
   --color-surface: #f7f9fb;
   --color-surface-dim: #d8dadc;
   --color-surface-bright: #f7f9fb;

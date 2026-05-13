@@ -28,16 +28,12 @@ export function EmptyState({
       <div className="mb-md flex h-16 w-16 items-center justify-center rounded-full bg-surface-container-low">
         <Icon name={icon} className="text-on-surface-variant" size={32} />
       </div>
-      <div className="min-w-0 self-stretch px-md">
-        <h4 className="mx-auto max-w-[32rem] text-headline-sm text-on-surface">
-          {title}
-        </h4>
-        {description && (
-          <p className="mx-auto mt-sm max-w-[36rem] text-body-md leading-relaxed text-on-surface-variant">
-            {description}
-          </p>
-        )}
-      </div>
+      <h4 className="text-headline-sm text-on-surface">{title}</h4>
+      {description && (
+        <p className="mt-xs max-w-4xl text-body-md text-on-surface-variant">
+          {description}
+        </p>
+      )}
       {action && <div className="mt-lg">{action}</div>}
     </div>
   );
