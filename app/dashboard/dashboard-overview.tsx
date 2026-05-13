@@ -78,7 +78,7 @@ export function DashboardOverview() {
             Here&rsquo;s what&rsquo;s happening across your hiring pipeline today.
           </p>
         </div>
-        <div className="flex items-center gap-sm">
+        <div className="flex items-center flex-col md:flex-row gap-sm">
           <Link href="/jobs">
             <Button variant="outline" leadingIcon={<Icon name="work" />}>
               View all jobs
