@@ -353,7 +353,12 @@ function DrawerImpl({ open, onClose, defaultJobId }: DrawerProps) {
           <Button variant="ghost" onClick={onClose} disabled={saving}>
             Cancel &amp; Discard
           </Button>
-          <Button onClick={handleSave} disabled={!canSave} loading={saving}>
+          <Button
+            className="text-white dark:text-black"
+            onClick={handleSave}
+            disabled={!canSave}
+            loading={saving}
+          >
             Save Screening Template
           </Button>
         </footer>
