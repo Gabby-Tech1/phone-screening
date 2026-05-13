@@ -1,6 +1,5 @@
 import { notFound } from "next/navigation";
 import { getJob, jobs } from "@/data/jobs";
-import { RecruiterShell } from "@/components/recruiter/shell";
 import { JobDetail } from "./job-detail";
 
 interface PageProps {
@@ -24,9 +23,5 @@ export default async function JobDetailPage({ params }: PageProps) {
   const { jobId } = await params;
   const job = getJob(jobId);
   if (!job) notFound();
-  return (
-    <RecruiterShell>
-      <JobDetail job={job} />
-    </RecruiterShell>
-  );
+  return <JobDetail job={job} />;
 }

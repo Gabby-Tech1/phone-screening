@@ -1,4 +1,3 @@
-import { RecruiterShell } from "@/components/recruiter/shell";
 import { ScreeningsList } from "./screenings-list";
 
 export const metadata = {
@@ -7,9 +6,5 @@ export const metadata = {
 };
 
 export default function ScreeningsPage() {
-  return (
-    <RecruiterShell>
-      <ScreeningsList />
-    </RecruiterShell>
-  );
+  return <ScreeningsList />;
 }

@@ -33,7 +33,6 @@ export function ScreeningsList() {
   const mounted = useMounted();
   const { show } = useToast();
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const [defaultJobId, setDefaultJobId] = useState<string | undefined>(undefined);
 
   const sorted = useMemo(
     () =>
@@ -78,10 +77,7 @@ export function ScreeningsList() {
         <Button
           leadingIcon={<Icon name="add_circle" fill={1} />}
           className="text-white"
-          onClick={() => {
-            setDefaultJobId(undefined);
-            setDrawerOpen(true);
-          }}
+          onClick={() => setDrawerOpen(true)}
         >
           Create Screening
         </Button>
@@ -165,17 +161,15 @@ export function ScreeningsList() {
                   >
                     Copy link
                   </Button>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    leadingIcon={<Icon name="edit" size={18} />}
-                    onClick={() => {
-                      setDefaultJobId(s.jobId);
-                      setDrawerOpen(true);
-                    }}
-                  >
-                    Replace
-                  </Button>
+                  <Link href={`/jobs/${s.jobId}/screenings/${s.id}/edit`}>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      leadingIcon={<Icon name="edit" size={18} />}
+                    >
+                      Edit
+                    </Button>
+                  </Link>
                   <Button
                     variant="ghost"
                     size="sm"
@@ -195,7 +189,6 @@ export function ScreeningsList() {
       <CreateScreeningDrawer
         open={drawerOpen}
         onClose={() => setDrawerOpen(false)}
-        defaultJobId={defaultJobId}
       />
     </>
   );

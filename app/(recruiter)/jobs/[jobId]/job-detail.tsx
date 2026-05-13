@@ -149,16 +149,24 @@ export function JobDetail({ job }: JobDetailProps) {
             </button>
           </div>
 
-          <Button
-            variant="ghost"
-            leadingIcon={<Icon name="open_in_new" />}
-            onClick={() =>
-              window.open(buildShareLink(job.id), "_blank", "noopener,noreferrer")
-            }
-            className="self-start"
-          >
-            Preview candidate view
-          </Button>
+          <div className="flex flex-wrap items-center gap-xs">
+            <Button
+              variant="ghost"
+              leadingIcon={<Icon name="open_in_new" />}
+              onClick={() =>
+                window.open(buildShareLink(job.id), "_blank", "noopener,noreferrer")
+              }
+            >
+              Preview candidate view
+            </Button>
+            {screening && (
+              <Link href={`/jobs/${job.id}/screenings/${screening.id}/edit`}>
+                <Button variant="ghost" leadingIcon={<Icon name="edit" />}>
+                  Edit screening
+                </Button>
+              </Link>
+            )}
+          </div>
 
           <div className="mt-auto space-y-md">
             <div className="flex items-center justify-between">

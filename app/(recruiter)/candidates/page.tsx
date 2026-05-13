@@ -1,4 +1,3 @@
-import { RecruiterShell } from "@/components/recruiter/shell";
 import { CandidatesList } from "./candidates-list";
 
 export const metadata = {
@@ -7,9 +6,5 @@ export const metadata = {
 };
 
 export default function CandidatesPage() {
-  return (
-    <RecruiterShell>
-      <CandidatesList />
-    </RecruiterShell>
-  );
+  return <CandidatesList />;
 }

@@ -64,8 +64,14 @@ export interface Screening {
 export interface Answer {
   questionId: string;
   responseType: ResponseType;
-  /** For audio answers in this UI-only build, this is a placeholder note. */
+  /** Text response, or a candidate-supplied note for audio answers. */
   value: string;
+  /** Optional `data:audio/...;base64,...` URL when the candidate recorded audio
+   *  via the in-browser MediaRecorder. Optional so older submissions without
+   *  this field deserialize cleanly. */
+  audioDataUrl?: string;
+  /** Recorded clip length in milliseconds, when `audioDataUrl` is present. */
+  audioDurationMs?: number;
 }
 
 export interface Submission {

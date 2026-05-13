@@ -109,6 +109,7 @@ export function ApplicantDetail({ job, applicantId }: ApplicantDetailProps) {
           <Button
             onClick={handleAnalyze}
             loading={analyzing}
+            className="text-white dark:text-black"
             leadingIcon={<Icon name="auto_awesome" fill={1} />}
           >
             {analysis ? "Re-run Analysis" : "Analyze Response"}
@@ -147,7 +148,13 @@ export function ApplicantDetail({ job, applicantId }: ApplicantDetailProps) {
                   &ldquo;{q.text}&rdquo;
                 </h3>
 
-                {q.responseType === "audio" ? (
+                {q.responseType === "audio" && answer?.audioDataUrl ? (
+                  <AudioAnswer
+                    url={answer.audioDataUrl}
+                    durationMs={answer.audioDurationMs}
+                    note={answer.value}
+                  />
+                ) : q.responseType === "audio" ? (
                   <AudioPlaceholder note={answer?.value} />
                 ) : answer && answer.value.trim() ? (
                   <blockquote className="mt-md rounded-r-lg border-l-4 border-secondary bg-surface-bright p-md text-body-md text-on-surface dark:bg-surface-container-low">
@@ -167,11 +174,11 @@ export function ApplicantDetail({ job, applicantId }: ApplicantDetailProps) {
         <aside className="lg:col-span-4">
           <div className="confetti-gradient sticky top-24 rounded-xl bg-primary-container p-lg text-on-primary-container shadow-2xl">
             <div className="mb-lg flex items-center gap-md">
-              <span className="rounded-lg bg-secondary p-sm text-on-secondary">
+              <span className="rounded-lg bg-secondary p-sm text-white dark:text-black">
                 <Icon name="psychology" fill={1} />
               </span>
               <div>
-                <h4 className="text-headline-sm text-on-primary-fixed">
+                <h4 className="text-headline-sm dark:text-white">
                   AI Analysis
                 </h4>
                 <p className="text-label-sm text-on-primary-container">
@@ -190,7 +197,7 @@ export function ApplicantDetail({ job, applicantId }: ApplicantDetailProps) {
               <AnalysisBody analysis={analysis} />
             ) : (
               <p className="text-body-sm text-on-primary-container">
-                Click <span className="font-semibold text-on-primary-fixed">Analyze Response</span>{" "}
+                Click <span className="font-semibold dark:text-white">Analyze Response</span>{" "}
                 to generate a structured summary, key strengths, concerns, and
                 a hiring recommendation based on this candidate&rsquo;s answers.
               </p>
@@ -198,14 +205,14 @@ export function ApplicantDetail({ job, applicantId }: ApplicantDetailProps) {
 
             {analysis && meta && (
               <div className="mt-lg border-t border-on-primary-container/20 pt-lg">
-                <h5 className="mb-sm text-label-md text-on-primary-fixed">
+                <h5 className="mb-sm text-label-md dark:text-white">
                   Final Recommendation
                 </h5>
                 <div
                   className={[
                     "flex items-center justify-between gap-sm rounded-lg px-md py-sm font-semibold shadow-lg",
                     meta.tone === "success" &&
-                      "bg-secondary text-on-secondary",
+                      "bg-secondary dark:text-white dark:text-black",
                     meta.tone === "warning" && "bg-amber-500 text-white",
                     meta.tone === "error" && "bg-error text-on-error",
                   ]
@@ -250,6 +257,44 @@ export function ApplicantDetail({ job, applicantId }: ApplicantDetailProps) {
 }
 
 /* ---------- Sub-components ---------- */
+
+function AudioAnswer({
+  url,
+  durationMs,
+  note,
+}: {
+  url: string;
+  durationMs?: number;
+  note?: string;
+}) {
+  const seconds = durationMs ? Math.max(1, Math.round(durationMs / 1000)) : null;
+  return (
+    <div className="mt-md space-y-sm">
+      <div className="flex items-center justify-between gap-md">
+        <span className="inline-flex items-center gap-xs text-label-sm font-semibold text-secondary">
+          <Icon name="graphic_eq" />
+          Audio response{seconds ? ` · ${seconds}s` : ""}
+        </span>
+      </div>
+      {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+      <audio
+        src={url}
+        controls
+        preload="metadata"
+        className="w-full"
+        aria-label="Candidate audio response"
+      />
+      {note && note.trim() && (
+        <blockquote className="rounded-r-lg border-l-4 border-secondary bg-surface-bright p-md text-body-sm text-on-surface dark:bg-surface-container-low">
+          <p className="mb-xs text-label-sm font-semibold uppercase tracking-wider text-on-surface-variant">
+            Written note
+          </p>
+          {note}
+        </blockquote>
+      )}
+    </div>
+  );
+}
 
 function AudioPlaceholder({ note }: { note?: string }) {
   return (
@@ -300,13 +345,13 @@ function AnalysisBody({ analysis }: { analysis: AnalysisResult }) {
   return (
     <div className="space-y-lg">
       <section>
-        <h5 className="mb-xs text-label-md text-on-primary-fixed">Summary</h5>
+        <h5 className="mb-xs text-label-md dark:text-white">Summary</h5>
         <p className="text-body-sm leading-relaxed text-on-primary-container">
           {analysis.summary}
         </p>
       </section>
       <section>
-        <h5 className="mb-sm text-label-md text-on-primary-fixed">
+        <h5 className="mb-sm text-label-md dark:text-white">
           Key Strengths
         </h5>
         <ul className="space-y-sm">
@@ -322,7 +367,7 @@ function AnalysisBody({ analysis }: { analysis: AnalysisResult }) {
         </ul>
       </section>
       <section>
-        <h5 className="mb-sm text-label-md text-on-primary-fixed">
+        <h5 className="mb-sm text-label-md dark:text-white">
           Potential Concerns
         </h5>
         {analysis.concerns.map((c) => (

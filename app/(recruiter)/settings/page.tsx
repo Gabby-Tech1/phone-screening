@@ -1,4 +1,3 @@
-import { RecruiterShell } from "@/components/recruiter/shell";
 import { SettingsView } from "./settings-view";
 
 export const metadata = {
@@ -7,9 +6,5 @@ export const metadata = {
 };
 
 export default function SettingsPage() {
-  return (
-    <RecruiterShell>
-      <SettingsView />
-    </RecruiterShell>
-  );
+  return <SettingsView />;
 }
