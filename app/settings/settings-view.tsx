@@ -248,8 +248,8 @@ export function SettingsView() {
             <li className="flex items-start gap-sm">
               <Icon name="palette" className="text-secondary" />
               <span>
-                <strong className="block text-on-surface">Stitch design</strong>
-                Tokens, layout, and components ported from the Stitch export.
+                <strong className="block text-on-surface">UI design</strong>
+                Designs, layout, and components drafted as a wireframe sketch on a paper.
               </span>
             </li>
           </ul>
