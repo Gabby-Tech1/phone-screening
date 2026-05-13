@@ -250,6 +250,7 @@ function DrawerImpl({ open, onClose, defaultJobId }: DrawerProps) {
             <Button
               variant="primary"
               size="lg"
+              className="text-white dark:text-black"
               onClick={handleGenerate}
               loading={generating}
               disabled={!canGenerate}
