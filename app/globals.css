@@ -1,26 +1,224 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Enable a `.dark` class variant for manual theme switching */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ============================================================
+ * Remotown Design System (from Google Stitch export)
+ *   - Brand: Precision, Reliability, Human-Centricity
+ *   - Style: Corporate Modern
+ *   - Type:  Inter only
+ * ============================================================ */
+@theme {
+  /* ---------- Color tokens (Material 3 inspired) ---------- */
+  --color-surface: #f7f9fb;
+  --color-surface-dim: #d8dadc;
+  --color-surface-bright: #f7f9fb;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #f2f4f6;
+  --color-surface-container: #eceef0;
+  --color-surface-container-high: #e6e8ea;
+  --color-surface-container-highest: #e0e3e5;
+  --color-surface-variant: #e0e3e5;
+  --color-surface-tint: #565e74;
+  --color-on-surface: #191c1e;
+  --color-on-surface-variant: #45464d;
+  --color-inverse-surface: #2d3133;
+  --color-inverse-on-surface: #eff1f3;
+
+  --color-background: #f7f9fb;
+  --color-on-background: #191c1e;
+
+  --color-outline: #76777d;
+  --color-outline-variant: #c6c6cd;
+
+  --color-primary: #000000;
+  --color-on-primary: #ffffff;
+  --color-primary-container: #131b2e;
+  --color-on-primary-container: #7c839b;
+  --color-inverse-primary: #bec6e0;
+  --color-primary-fixed: #dae2fd;
+  --color-primary-fixed-dim: #bec6e0;
+  --color-on-primary-fixed: #131b2e;
+  --color-on-primary-fixed-variant: #3f465c;
+
+  --color-secondary: #0051d5;
+  --color-on-secondary: #ffffff;
+  --color-secondary-container: #316bf3;
+  --color-on-secondary-container: #fefcff;
+  --color-secondary-fixed: #dbe1ff;
+  --color-secondary-fixed-dim: #b4c5ff;
+  --color-on-secondary-fixed: #00174b;
+  --color-on-secondary-fixed-variant: #003ea8;
+
+  --color-tertiary: #000000;
+  --color-on-tertiary: #ffffff;
+  --color-tertiary-container: #0b1c30;
+  --color-on-tertiary-container: #75859d;
+  --color-tertiary-fixed: #d3e4fe;
+  --color-tertiary-fixed-dim: #b7c8e1;
+  --color-on-tertiary-fixed: #0b1c30;
+  --color-on-tertiary-fixed-variant: #38485d;
+
+  --color-error: #ba1a1a;
+  --color-on-error: #ffffff;
+  --color-error-container: #ffdad6;
+  --color-on-error-container: #93000a;
+
+  --color-success: #15803d;
+  --color-warning: #b45309;
+  --color-info: #1d4ed8;
+
+  /* ---------- Spacing scale ---------- */
+  --spacing-base: 4px;
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 40px;
+  --spacing-gutter: 24px;
+  --spacing-margin: 32px;
+  --spacing-container-max: 1440px;
+
+  /* ---------- Border radius ---------- */
+  --radius-sm: 0.125rem;
+  --radius-DEFAULT: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-full: 9999px;
+
+  /* ---------- Font family ---------- */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo,
+    Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+  /* ---------- Typography scale ---------- */
+  --text-display-lg: 48px;
+  --text-display-lg--line-height: 56px;
+  --text-display-lg--letter-spacing: -0.02em;
+  --text-display-lg--font-weight: 700;
+
+  --text-headline-lg: 32px;
+  --text-headline-lg--line-height: 40px;
+  --text-headline-lg--letter-spacing: -0.02em;
+  --text-headline-lg--font-weight: 600;
+
+  --text-headline-md: 24px;
+  --text-headline-md--line-height: 32px;
+  --text-headline-md--font-weight: 600;
+
+  --text-headline-sm: 20px;
+  --text-headline-sm--line-height: 28px;
+  --text-headline-sm--font-weight: 600;
+
+  --text-body-lg: 18px;
+  --text-body-lg--line-height: 28px;
+  --text-body-lg--font-weight: 400;
+
+  --text-body-md: 16px;
+  --text-body-md--line-height: 24px;
+  --text-body-md--font-weight: 400;
+
+  --text-body-sm: 14px;
+  --text-body-sm--line-height: 20px;
+  --text-body-sm--font-weight: 400;
+
+  --text-label-md: 14px;
+  --text-label-md--line-height: 20px;
+  --text-label-md--font-weight: 500;
+
+  --text-label-sm: 12px;
+  --text-label-sm--line-height: 16px;
+  --text-label-sm--letter-spacing: 0.02em;
+  --text-label-sm--font-weight: 600;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ---------- Dark theme overrides ----------
+ * We invert the surface tonal layers so cards still stand above the background,
+ * and shift primary/secondary so the brand stays readable on dark.
+ */
+.dark {
+  --color-surface: #0f1316;
+  --color-surface-dim: #0a0d10;
+  --color-surface-bright: #1a1f23;
+  --color-surface-container-lowest: #0a0d10;
+  --color-surface-container-low: #14181c;
+  --color-surface-container: #181c20;
+  --color-surface-container-high: #1f242a;
+  --color-surface-container-highest: #262b31;
+  --color-surface-variant: #262b31;
+
+  --color-on-surface: #e6e8ea;
+  --color-on-surface-variant: #c6c6cd;
+  --color-inverse-surface: #e6e8ea;
+  --color-inverse-on-surface: #2d3133;
+
+  --color-background: #0f1316;
+  --color-on-background: #e6e8ea;
+
+  --color-outline: #76777d;
+  --color-outline-variant: #2f343a;
+
+  --color-primary: #ffffff;
+  --color-on-primary: #131b2e;
+  --color-primary-container: #1f2a44;
+  --color-on-primary-container: #bec6e0;
+
+  --color-secondary: #4f8aff;
+  --color-on-secondary: #00174b;
+  --color-secondary-container: #003ea8;
+  --color-on-secondary-container: #dbe1ff;
+
+  --color-error: #ffb4ab;
+  --color-on-error: #690005;
+  --color-error-container: #93000a;
+  --color-on-error-container: #ffdad6;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ---------- Base ---------- */
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-background);
+  color: var(--color-on-surface);
+  font-family: var(--font-sans);
+  font-feature-settings: "cv11", "ss01";
+}
+
+*:focus-visible {
+  outline: 2px solid var(--color-secondary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ---------- Material Symbols Outlined ----------
+ * Loaded via CSS @import in layout.tsx <head>.
+ * Sets variation defaults; individual icons may override via inline style.
+ */
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+  vertical-align: middle;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Tiny dot-loader used in mocked AI states */
+@keyframes pulse-dot {
+  0%, 80%, 100% { opacity: 0.2; transform: scale(0.85); }
+  40% { opacity: 1; transform: scale(1); }
+}
+.loader-dot {
+  animation: pulse-dot 1.2s infinite ease-in-out both;
+}
+
+/* Subtle radial background used on the analysis card */
+.confetti-gradient {
+  background:
+    radial-gradient(circle at top right, rgba(49, 107, 243, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at bottom left, rgba(0, 81, 213, 0.05) 0%, transparent 40%);
 }
